@@ -1,0 +1,15 @@
+---
+permalink: /{{ locale }}/index.html
+translationKey: "homepage"
+templateClass: "homepage"
+---
+
+{% extends "layouts/base.njk" %}
+
+{% set metaTitle = site[locale].metaTitle %}
+{% set metaDescription = site[locale].metaDescription %}
+{% set metaImage = site[locale].metaImage %}
+
+{% block content %}
+  {% include "../../_includes/postslist.njk" %}
+{% endblock %}

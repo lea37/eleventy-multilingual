@@ -1,0 +1,15 @@
+{
+  "name": "eleventy-multilang",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "eleventy --serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.10.0",
+    "moment": "^2.24.0"
+  }
+}

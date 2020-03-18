@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ metaTitle }}</title>
+  <link rel="stylesheet" href="/css/main.min.css">
+
+  <!-- open graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:image" content="{{ metaImage }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+
+  <!-- twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="{{ site.twitter }}">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  <meta name="twitter:image" content="{{ metaImage }}">
+</head>
+<body {% if templateClass %} class="{{ templateClass }}"{% endif %}>
+  {% include "partials/siteheader.njk" %}
+  {% block content %}{% endblock %}
+  {% include "partials/sitefooter.njk" %}
+</body>
+</html>
