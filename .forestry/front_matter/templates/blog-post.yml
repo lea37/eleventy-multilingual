@@ -8,3 +8,5 @@ fields:
 - type: text
   name: translationKey
   label: translationKey
+pages:
+- src/fr/posts/un-autre-article-test.md
