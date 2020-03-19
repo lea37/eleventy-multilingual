@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "build": {
+    "install_dependencies_command": "npm install",
+    "instant_preview_command": "npm run forestry:preview",
+    "working_dir": "src/",
+    "preview_output_directory": "dist/fr/"
+  },
   "scripts": {
     "build": "npx @11ty/eleventy",
-    "forestry:preview": "npm run build",
+    "forestry:preview": "npx @11ty/eleventy --serve",
     "serve": "npx @11ty/eleventy --serve"
   },
   "author": "",

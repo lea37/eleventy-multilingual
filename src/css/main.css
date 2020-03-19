@@ -1,7 +1,88 @@
+html, body {
+    color: #1a1423;
+    font-family: sans-serif;
+    background-color: #fafafa;
+    text-rendering: optimizeLegibility;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.004);
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;   
+    letter-spacing: 0.02em; 
+    line-height: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    font-family: serif;
+    letter-spacing: initial;
+}
+
+a {
+    color: #1a1423;
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style-type: none;
+}
+
+pre {
+    background-color: #000;
+    color: #fff;
+    padding: 1em;
+}
+
 .inner {
     max-width: 54rem;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+}
+
+.logo {
+    font-size: 30px;
+}
+
+.header {
+    background-color: #000;
+    color: #fff;
+}
+
+.header a {
+    color: #fff;
+}
+
+.header .inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav li {
+    display: inline-block;
+    padding-right: 1em;
+}
+
+.nav li a {
+    padding: 0.5em 0;
+}
+
+.c-lggnav li {
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.c-lggnav .c-lggnav__link {
+    padding: 0.5em;
+    font-size: 14px;
+}
+
+.c-lggnav .c-lggnav__link.is-active {
+    color: #000;
+    background-color: #fff;
 }
