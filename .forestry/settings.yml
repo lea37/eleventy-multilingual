@@ -5,13 +5,13 @@ admin_path:
 webhook_url: 
 sections:
 - type: directory
-  path: fr/posts
+  path: src/fr/posts
   label: FR posts directory
   create: all
   match: "**/*"
   new_doc_ext: md
 - type: directory
-  path: en/posts
+  path: src/en/posts
   label: EN posts directory
   create: all
   match: "**/*"
