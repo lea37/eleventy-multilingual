@@ -15,10 +15,12 @@ module.exports = {
   ],
   en: {
     metaTitle: "Title in english",
-    metaDescription: "Description in english"
+    metaDescription: "Description in english",
+    back: "Back"
   },
   fr: {
     metaTitle: "Titre en français",
-    metaDescription: "Description en français"
+    metaDescription: "Description en français",
+    back: "Retour"
   }
 };

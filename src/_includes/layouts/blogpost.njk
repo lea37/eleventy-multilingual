@@ -1,7 +1,7 @@
 {% extends "layouts/base.njk" %}
 
 {% block content %}
-    <a href="/{{ locale }}" class="back">← Retour</a>
+    <a href="/{{ locale }}" class="back">← {{ site[locale].back }}</a>
     <h1>{{ title }}</h1>
     {{ content | safe }}
 {% endblock %}
