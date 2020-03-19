@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npm run forestry:preview",
     "serve": "eleventy --serve"
   },
   "author": "",
