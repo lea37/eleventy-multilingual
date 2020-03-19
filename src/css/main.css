@@ -106,6 +106,10 @@ p code {
     font-size: 60px;
 }
 
+.post {
+    width: 100%;
+}
+
 .post-list {
     margin-top: 3em;
 }
