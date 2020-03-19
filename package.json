@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx @11ty/eleventy",
+    "forestry:preview": "npm run build",
     "serve": "npx @11ty/eleventy --serve"
   },
   "author": "",

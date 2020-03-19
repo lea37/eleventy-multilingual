@@ -83,56 +83,15 @@ Now that our dates are automatically localized, let's move to collections.
 
 We can also use our directory structure to create collections in Eleventy. The simplest way to go about it is to create collections per language. We can accomplish that using the getFilteredByGlob method in our .eleventy.js file.
 
-```
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addCollection("posts_en", function(collection) {
-    return collection.getFilteredByGlob("./src/en/posts/*.md");
-  });
-};
-
-module.exports = function(eleventyConfig) {
-  eleventyConfig.addCollection("posts_fr", function(collection) {
-    return collection.getFilteredByGlob("./src/fr/posts/*.md");
-  });
-};
-```
-
 Because they live in subdirectories of our language directories, all those markdown files have that handy locale variable available. We can for example use it to create permalinks for all our posts.
 
 Instead of adding a permalink variable in each front-matter, we can simply add a posts.js or posts.json directory data file in each of our three posts folders with the following content:
 
-```
-{
-  permalink: "/{{ locale }}/blog/{{ page.fileSlug }}/index.html"
-}
-```
-
 Now that we have localised detail pages for all of our posts, we can go into all three of our blog.njk pages and loop over our language-specific collections.
 
-```
-{% for post in collections.posts_en | reverse %}
-  {% if loop.first %}<ul>{% endif %}
-    <li>
-
-      <article>
-        <p><time datetime="{{ post.date | date('Y-MM-DD') }}">{{ post.date | date("DD MMMM[,] Y", locale) }}</time></p>
-        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
-      </article>
-
-    </li>
-
-  {% if loop.last %}</ul>{% endif %}
-{% endfor %}
-```
 
 We could make use of our locale variable to call our collections too. We would just have to switch to a square brackets notation instead.
 
-```
-{% set posts = collections["posts_" + locale] %}
-{% for post in posts %}
-  {# loop content #}
-{% endfor %}
-```
 
 ### Localised layouts and partials
 
@@ -146,74 +105,11 @@ Let's start with a layout example:
 
 `./src/_data/site.js` is going to give us variables available under a site key.
 
-```
-module.exports = {
-  buildTime: new Date(),
-  baseUrl: "https://www.mysite.com",
-  name: "mySite",
-  twitter: "@handle",
-  en: {
-    metaTitle: "Title in english",
-    metaDescription: "Description in english"
-  },
-  fr: {
-    metaTitle: "Titre en français",
-    metaDescription: "Description en français"
-  }
-};
-```
-
 We can use those variables in our ./src/fr/pages/index.njk file. In this case, we assign some of them to Nunjucks variables instead of using them directly because those are values we might want to override for specific pages. We could use the same logic for a posts specific template.
 
-```
----
-permalink: /{{ locale }}/index.html
----
-
-{% extends "layouts/base.njk" %}
-
-{% set metaTitle = site[locale].metaTitle %}
-{% set metaDescription = site[locale].metaDescription %}
-{% set metaImage = site[locale].metaImage %}
-
-{% block content %}
-  {# page content #}
-{% endblock %}
-```
 
 Since our page template extends `./src/_includes/layouts/base.njk`, Nunjucks variables declared in the child template as well as our Eleventy global variables are going to be available in that layout too.
 
-```
-<!DOCTYPE html>
-<html lang="{{ locale }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{ metaTitle }}</title>
-  <link rel="stylesheet" href="/css/main.min.css">
-
-  <!-- open graph -->
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="{{ metaTitle }}">
-  <meta property="og:image" content="{{ metaImage }}">
-  <meta property="og:site_name" content="{{ site.name }}">
-  <meta property="og:description" content="{{ metaDescription }}">
-
-  <!-- twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="{{ site.twitter }}">
-  <meta name="twitter:title" content="{{ metaTitle }}">
-  <meta name="twitter:description" content="{{ metaDescription }}">
-  <meta name="twitter:image" content="{{ metaImage }}">
-</head>
-<body>
-  {% include "partials/siteheader.njk" %}
-  {% block content %}{% endblock %}
-  {% include "partials/sitefooter.njk" %}
-</body>
-</html>
-```
 
 ### Partials
 
@@ -221,40 +117,7 @@ Localizing partials like `./src/_includes/partials/footer.njk` can be done using
 
 First, we create a ./data/footer.js file using our locales as keys.
 
-```
-module.exports = {
-  mapUrl: "https://goo.gl/maps/3YTkhCgfEgj1PRAd7",
-  fr: {
-    addressTitle: "Adresse",
-    addressStreet: "Rue du marché",
-    addressNumber: "42",
-    addressPostcode: "1000",
-    addressCity: "Bruxelles",
-    directionsLabel: "Itinéraire"
-  },
-  en: {
-    addressTitle: "Address",
-    addressStreet: "Market street",
-    addressNumber: "42",
-    addressPostcode: "1000",
-    addressCity: "Brussels",
-    directionsLabel: "Directions"
-  }
-};
-```
-
 Then, in `./src/_includes/partials/footer.njk`, we just rely on the value of our locale variable to access those keys using brackets notation:
-
-```
-<footer>
-  <h2>{{ footer[locale].addressTitle }}</h2>
-  <p>
-    {{ footer[locale].addressStreet }}, {{ footer[locale].addressNumber }}<br>
-    {{ footer[locale].addressPostcode }}, {{ footer[locale].addressCity }}
-  </p>
-  <p><a href="{{ footer.mapUrl }}">{{ footer[locale].directionsLabel }}</a></p>
-</footer>
-```
 
 Hurrah! We now have a footer with automatic translations.
 
