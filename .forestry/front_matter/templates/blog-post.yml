@@ -1,0 +1,17 @@
+---
+label: Blog post
+hide_body: false
+fields:
+- name: title
+  type: text
+  config:
+    required: false
+  label: Title
+- name: key
+  type: text
+  config:
+    required: false
+  label: Key
+pages:
+- en/posts/another-test-post.md
+- fr/posts/une-autre-article-test.md

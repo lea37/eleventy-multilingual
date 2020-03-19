@@ -9,19 +9,20 @@ sections:
   label: FR posts directory
   create: all
   match: "**/*"
-  new_doc_ext: ".md"
+  new_doc_ext: md
 - type: directory
   path: en/posts
   label: EN posts directory
   create: all
   match: "**/*"
-  new_doc_ext: ".md"
+  new_doc_ext: md
 upload_dir: uploads
 public_path: "/uploads"
 front_matter_path: ''
 use_front_matter_path: false
 file_template: ":filename:"
 build:
+  preview_output_directory: dist/fr
   install_dependencies_command: npm install
   preview_docker_image: node:10
   mount_path: "/srv"
