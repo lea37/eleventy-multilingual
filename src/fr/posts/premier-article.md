@@ -1,6 +1,6 @@
 ---
 title: Mon premier article
-translationKey: "mon-premier-article"
+translationKey: "first-blogpost"
 ---
 
 ## Some other content

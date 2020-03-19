@@ -1,28 +1,6 @@
-{# loop though site.languages #}
-{% for lgg in site.languages %}
-  {% if loop.first %}<ul class="c-lggnav">{% endif %}
-
-  {# set translatedUrl to the homepage of that language by default #}
-  {% set translatedUrl = "/" + lgg.code + "/" %}
-
-  {# set current language class #}
-  {% set activeClass = "is-active" if lgg.code == locale else "" %}
-
-  {# loop through all the content of the site #}
-  {% for item in collections.all %}
-
-    {# for each item in the loop, check if
-    - its translationKey matches the current item translationKey
-    - its locale matches the code of the language we are looping through #}
-    {% if item.data.translationKey == translationKey and item.data.locale == lgg.code %}
-      {% set translatedUrl = item.url %}
-    {% endif %}
-
-  {% endfor%}
-
-  <li class="c-lggnav__item">
-    <a class="c-lggnav__link  {{ activeClass }}" href="{{ translatedUrl }}">{{ lgg.label }}</a>
-  </li>
-
-  {% if loop.last %}</ul>{% endif %}
-{% endfor %}
+<header>
+    <div class="inner">
+        {% include "partials/langswitch.njk" %}
+        {% include "partials/nav.njk" %}
+    </div>
+</header>

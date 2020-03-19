@@ -1,6 +1,6 @@
 ---
 title: My first post
-translationKey: "my-first-blogpost"
+translationKey: "first-blogpost"
 ---
 
 ## Some title

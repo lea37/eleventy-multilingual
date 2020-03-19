@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ metaTitle }}</title>
-  <link rel="stylesheet" href="/css/main.min.css">
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <link rel="stylesheet" href="/css/main.css">
 
   <!-- open graph -->
   <meta property="og:type" content="article">
@@ -23,7 +24,11 @@
 </head>
 <body {% if templateClass %} class="{{ templateClass }}"{% endif %}>
   {% include "partials/siteheader.njk" %}
-  {% block content %}{% endblock %}
+  <main class="main">
+    <div class="inner">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
   {% include "partials/sitefooter.njk" %}
 </body>
 </html>
