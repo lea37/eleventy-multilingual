@@ -54,6 +54,10 @@ pre {
     color: #fff;
 }
 
+.header li {
+    display: inline-block;
+}
+
 .header a {
     color: #fff;
 }
@@ -64,7 +68,6 @@ pre {
 }
 
 .nav li {
-    display: inline-block;
     padding-right: 1em;
 }
 
