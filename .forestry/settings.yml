@@ -9,12 +9,14 @@ sections:
   label: FR posts directory
   create: all
   match: "**/*"
+  exclude: "*.json"
   new_doc_ext: md
 - type: directory
   path: src/en/posts
   label: EN posts directory
   create: all
   match: "**/*"
+  exclude: "*.json"
   new_doc_ext: md
 upload_dir: uploads
 public_path: "/uploads"
