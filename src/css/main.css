@@ -83,6 +83,14 @@ p code {
     text-transform: uppercase;
 }
 
+.index .c-lggnav .c-lggnav__item .c-lggnav__link {
+    color: #000;
+}
+
+.index .c-lggnav .c-lggnav__item:first-child {
+    border-right: 1px solid #000;
+}
+
 .c-lggnav .c-lggnav__item .c-lggnav__link {
     padding: 1em 0;
     display: block;
