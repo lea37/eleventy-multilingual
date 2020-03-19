@@ -7,13 +7,8 @@ fields:
   config:
     required: false
   label: Title
-- name: date
-  type: number
-  label: Date
-  description: ''
-  default: 0
-  required: true
+- name: key
+  type: text
   config:
-    min: 
-    max: 
-    step: 
+    required: false
+  label: Key
