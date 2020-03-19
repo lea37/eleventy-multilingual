@@ -2,16 +2,12 @@
 label: Blog post
 hide_body: false
 fields:
-- name: title
-  type: text
-  config:
-    required: false
-  label: Title
-- name: key
-  type: text
-  config:
-    required: false
-  label: Key
+- type: text
+  name: title
+  label: title
+- type: text
+  name: translationKey
+  label: translationKey
 pages:
-- en/posts/another-test-post.md
-- fr/posts/une-autre-article-test.md
+- src/en/posts/another-post.md
+- src/fr/posts/un-autre-article-test.md
