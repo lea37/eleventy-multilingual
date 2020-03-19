@@ -10,7 +10,7 @@
     "preview_output_directory": "dist/fr/"
   },
   "scripts": {
-    "build": "npx @11ty/eleventy",
+    "build": "eleventy",
     "forestry:preview": "npx @11ty/eleventy --serve",
     "serve": "npx @11ty/eleventy --serve"
   },
