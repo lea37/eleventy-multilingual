@@ -18,7 +18,11 @@
   "license": "ISC",
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "moment": "^2.24.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "highlight.js": "^9.18.1",
+    "markdown-it": "^10.0.0"
+  }
 }

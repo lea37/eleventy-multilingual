@@ -3,11 +3,13 @@ title: Multilingual sites with Eleventy
 translationKey: "eleventy-blogpost"
 ---
 
+[Original post](https://www.webstoemp.com/blog/multilingual-sites-eleventy/) by [Jérôme Coupé](https://twitter.com/jeromecoupe?lang=fr)
+
 Eleventy might not have multilingual and localisation capabilities out of the box, but you can build a pretty good setup using global data files, collections and Nunjucks as a templating language.
 
 In order to have a basic project to work with, let's build a fairly straightforward multilingual blog.
 
-Here is the folder architecture we will be working with. It is quite a standard Eleventy architecture and a pretty straightforward project. However, I believe the principles and techniques can be applied to bigger ones.
+Here is the folder architecture we will be working with. It is quite a standard [Eleventy](https://www.11ty.dev/) architecture and a pretty straightforward project. However, I believe the principles and techniques can be applied to bigger ones.
 
 ```
 +-- src
@@ -44,11 +46,11 @@ Here is the folder architecture we will be working with. It is quite a standard 
 
 ### Set locales
 
-The first step is to create our locales using directory data files.
+The first step is to create our locales using [directory data files](https://www.11ty.dev/docs/data-template-dir/).
 
-We simply add en.json and fr.json in the root of our language directories. In each of them, we specify a locale key. That will make the corresponding values accessible in all template files living in those languages directories and subdirectories.
+We simply add `en.json` and `fr.json` in the root of our language directories. In each of them, we specify a `locale` key. That will make the corresponding values accessible in all template files living in those languages directories and subdirectories.
 
-Here what our fr.json file would contain:
+Here what our `fr.json` file would contain:
 
 ```
 {
@@ -56,11 +58,11 @@ Here what our fr.json file would contain:
 }
 ```
 
-{{ locale }} will now output "fr" or "en" for any of our template files, depending on where that template file is located in our folder architecture.
+`{{ locale }}` will now output "fr" or "en" for any of our template files, depending on where that template file is located in our folder architecture.
 
 ### Localised date filter
 
-Nunjucks does not have a date filter. We can create one using moment.js and pass it our locale value to localise dates for us, which is an important part of all multilingual projects. In order to do that, we use the following code in our .eleventy.js file:
+Nunjucks does not have a date filter. We can create one using `moment.js` and pass it our `locale` value to localise dates for us, which is an important part of all multilingual projects. In order to do that, we use the following code in our `.eleventy.js` file:
 
 ```
 // date filter (localized)
@@ -71,7 +73,7 @@ eleventyConfig.addNunjucksFilter("date", function(date, format, locale) {
 });
 ```
 
-Now, we can just call that filter in our templates and pass it a locale parameter. Note that, since we set the locale to "en" by default, we can use our filter without a locale parameter for our purely numeric dates. Here is a small example.
+Now, we can just call that filter in our templates and pass it a `locale` parameter. Note that, since we set the locale to "en" by default, we can use our filter without a `locale` parameter for our purely numeric dates. Here is a small example.
 
 ```
 <p><time datetime="{{ post.date | date('Y-MM-DD') }}">{{ post.item|date("DD MMMM Y", locale) }}</time></p>
@@ -81,23 +83,61 @@ Now that our dates are automatically localized, let's move to collections.
 
 ### Localized collections
 
-We can also use our directory structure to create collections in Eleventy. The simplest way to go about it is to create collections per language. We can accomplish that using the getFilteredByGlob method in our .eleventy.js file.
+We can also use our directory structure to create collections in Eleventy. The simplest way to go about it is to create collections per language. We can accomplish that using the [getFilteredByGlob](https://www.11ty.dev/docs/collections/#getfilteredbyglob(-glob-) method in our `.eleventy.js` file.
 
-Because they live in subdirectories of our language directories, all those markdown files have that handy locale variable available. We can for example use it to create permalinks for all our posts.
+```
+module.exports = function(eleventyConfig) {
+  eleventyConfig.addCollection("posts_en", function(collection) {
+    return collection.getFilteredByGlob("./src/en/posts/*.md");
+  });
+};
 
-Instead of adding a permalink variable in each front-matter, we can simply add a posts.js or posts.json directory data file in each of our three posts folders with the following content:
+module.exports = function(eleventyConfig) {
+  eleventyConfig.addCollection("posts_fr", function(collection) {
+    return collection.getFilteredByGlob("./src/fr/posts/*.md");
+  });
+};
+```
 
-Now that we have localised detail pages for all of our posts, we can go into all three of our blog.njk pages and loop over our language-specific collections.
+Because they live in subdirectories of our language directories, all those markdown files have that handy `locale` variable available. We can for example use it to create permalinks for all our posts.
 
+Instead of adding a `permalink` variable in each front-matter, we can simply add a `posts.js` or `posts.json` directory data file in each of our three `posts` folders with the following content:
 
-We could make use of our locale variable to call our collections too. We would just have to switch to a square brackets notation instead.
+```
+{
+  permalink: "/{{ locale }}/blog/{{ page.fileslug }}/index.html"
+}
+```
 
+Now that we have localised detail pages for all of our posts, we can go into all three of our `blog.njk` pages and loop over our language-specific collections.
+
+```
+{{"{% for post in collections.posts_en | reverse %}" | escape }}
+  {{"{% if loop.first %}<ul>{% endif %}" | escape }}
+    <li>
+      <article>
+        <p><time datetime="{{ post.date | date('Y-MM-DD') }}">{{ post.date | date("DD MMMM[,] Y", locale) }}</time></p>
+        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+      </article>
+    </li>
+  {{"{% if loop.last %}</ul>{% endif %}" | escape }}
+{{"{% endfor %}" | escape }}
+```
+
+We could make use of our `locale` variable to call our collections too. We would just have to switch to a square brackets notation instead.
+
+```
+{{"{% set posts = collections['posts_' + locale] %}" | escape }}
+{{"{% for post in posts %}" | escape }}
+  {{"{# loop content #}" | escape }}
+{{"{% endfor %}" | escape }}
+```
 
 ### Localised layouts and partials
 
 Although duplicating our pages and posts is quite logical, we don't want to duplicate our layouts and partials.
 
-Luckily, we can avoid it by feeding them localised strings. In order to do that, we need to create multilingual global data files containing our locales as keys. We can then reference those keys dynamically in our layouts or partials using our trusty locale variable.
+Luckily, we can avoid it by feeding them localised strings. In order to do that, we need to create multilingual [global data files](https://www.11ty.dev/docs/data-global/) containing our locales as keys. We can then reference those keys dynamically in our layouts or partials using our trusty `locale` variable.
 
 ### Layouts
 
@@ -105,11 +145,74 @@ Let's start with a layout example:
 
 `./src/_data/site.js` is going to give us variables available under a site key.
 
-We can use those variables in our ./src/fr/pages/index.njk file. In this case, we assign some of them to Nunjucks variables instead of using them directly because those are values we might want to override for specific pages. We could use the same logic for a posts specific template.
+```
+module.exports = {
+  buildTime: new Date(),
+  baseUrl: "https://www.mysite.com",
+  name: "mySite",
+  twitter: "@handle",
+  en: {
+    metaTitle: "Title in english",
+    metaDescription: "Description in english"
+  },
+  fr: {
+    metaTitle: "Titre en français",
+    metaDescription: "Description en français"
+  }
+};
+```
 
+We can use those variables in our `./src/fr/pages/index.njk file`. In this case, we assign some of them to Nunjucks variables instead of using them directly because those are values we might want to override for specific pages. We could use the same logic for a posts specific template.
+
+```
+---
+permalink: /{{ locale }}/index.html
+---
+
+{{"{% extends `layouts/base.njk` %}" | escape }}
+
+{{"{% set metaTitle = site[locale].metaTitle %}" | escape }}
+{{"{% set metaDescription = site[locale].metaDescription %}" | escape }}
+{{"{% set metaImage = site[locale].metaImage %}" | escape }}
+
+{{"{% block content %}" | escape }}
+  {{"{# page content #}" | escape }}
+{{"{% endblock %}" | escape }}
+```
 
 Since our page template extends `./src/_includes/layouts/base.njk`, Nunjucks variables declared in the child template as well as our Eleventy global variables are going to be available in that layout too.
 
+```
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ metaTitle }}</title>
+  <link rel="stylesheet" href="/css/main.min.css">
+
+  <!-- open graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta property="og:image" content="{{ metaImage }}">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+
+  <!-- twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="{{ site.twitter }}">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  <meta name="twitter:image" content="{{ metaImage }}">
+</head>
+<body>
+  {{"{% include "partials/siteheader.njk" %}" | escape }}
+  {{"{% block content %}{% endblock %}" | escape }}
+  {{"{% include `partials/sitefooter.njk` %}" | escape }}
+</body>
+</html>
+```
 
 ### Partials
 
@@ -117,10 +220,39 @@ Localizing partials like `./src/_includes/partials/footer.njk` can be done using
 
 First, we create a ./data/footer.js file using our locales as keys.
 
-Then, in `./src/_includes/partials/footer.njk`, we just rely on the value of our locale variable to access those keys using brackets notation:
+```
+module.exports = {
+  mapUrl: "https://goo.gl/maps/3YTkhCgfEgj1PRAd7",
+  fr: {
+    addressTitle: "Adresse",
+    addressStreet: "Rue du marché",
+    addressNumber: "42",
+    addressPostcode: "1000",
+    addressCity: "Bruxelles",
+    directionsLabel: "Itinéraire"
+  },
+  en: {
+    addressTitle: "Address",
+    addressStreet: "Market street",
+    addressNumber: "42",
+    addressPostcode: "1000",
+    addressCity: "Brussels",
+    directionsLabel: "Directions"
+  }
+};
+```
+
+Then, in `./src/_includes/partials/footer.njk`, we just rely on the value of our `locale` variable to access those keys using brackets notation:
+
+```
+<footer>
+  <h2>{{ footer[locale].addressTitle }}</h2>
+  <p>
+    {{ footer[locale].addressStreet }}, {{ footer[locale].addressNumber }}<br>
+    {{ footer[locale].addressPostcode }}, {{ footer[locale].addressCity }}
+  </p>
+  <p><a href="{{ footer.mapUrl }}">{{ footer[locale].directionsLabel }}</a></p>
+</footer>
+```
 
 Hurrah! We now have a footer with automatic translations.
-
-### Language switcher
-
-If you need to build a language switcher, here is a straightforward approach using this setup.

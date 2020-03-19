@@ -33,9 +33,17 @@ ul li {
 }
 
 pre {
-    background-color: #000;
-    color: #fff;
+    background-color: #191B2A;
+    border-radius: 3px;
     padding: 1em;
+    font-family: monospace;
+    font-size: 16px;
+    color: #39FFBA;
+}
+
+p code {
+    font-size: 14px;
+    font-weight: 800;
 }
 
 .header {
@@ -65,12 +73,13 @@ pre {
 .c-lggnav {
     background-color: #fff;
     border-bottom: 1px solid #000;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .c-lggnav .c-lggnav__item {
-    width: 49%;
+    width: 100%;
     text-align: center;
-    display: inline-block;
     text-transform: uppercase;
 }
 
@@ -103,7 +112,12 @@ pre {
 
 .post-list li {
     padding: 0.5em 0;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #DCDCDC;
+    transition: 0.4s;
+}
+
+.post-list li:hover {
+    background: #F5F5F5;
 }
 
 .u-flex {
