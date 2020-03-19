@@ -13,4 +13,5 @@ fields:
     required: false
   label: Key
 pages:
+- en/posts/another-test-post.md
 - fr/posts/une-autre-article-test.md
