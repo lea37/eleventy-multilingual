@@ -15,6 +15,7 @@ html, body {
 h1, h2, h3 {
     font-family: serif;
     letter-spacing: initial;
+    margin: 0;
 }
 
 a {
@@ -37,6 +38,12 @@ pre {
     padding: 1em;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 .inner {
     max-width: 54rem;
     margin-left: auto;
@@ -45,47 +52,64 @@ pre {
     padding-right: 1.25rem;
 }
 
-.logo {
-    font-size: 30px;
+.main .inner {
+    margin-top: 10em;
 }
 
-.header {
-    background-color: #000;
-    color: #fff;
+.back {
+    margin-bottom: 2em;
+    display: block;
+    font-size: 14px;
 }
 
-.header li {
-    display: inline-block;
+.c-lggnav {
+    background-color: #fff;
+    border-bottom: 1px solid #000;
 }
 
-.header a {
-    color: #fff;
-}
-
-.header .inner {
-    display: flex;
-    justify-content: space-between;
-}
-
-.nav li {
-    padding-right: 1em;
-}
-
-.nav li a {
-    padding: 0.5em 0;
-}
-
-.c-lggnav li {
+.c-lggnav .c-lggnav__item {
+    width: 49%;
+    text-align: center;
     display: inline-block;
     text-transform: uppercase;
 }
 
-.c-lggnav .c-lggnav__link {
-    padding: 0.5em;
-    font-size: 14px;
+.c-lggnav .c-lggnav__item .c-lggnav__link {
+    padding: 1em 0;
+    display: block;
+    color: #ccc;
 }
 
-.c-lggnav .c-lggnav__link.is-active {
-    color: #000;
-    background-color: #fff;
+.c-lggnav .c-lggnav__item.is-active {
+    background-color: #000;
+}
+.c-lggnav .c-lggnav__item.is-active .c-lggnav__link {
+    color: #fff;
+}
+
+.c-lggnav .c-lggnav__link {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.title {
+    font-size: 60px;
+}
+
+.post-list {
+    margin-top: 3em;
+}
+
+.post-list li {
+    padding: 0.5em 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.u-flex {
+    display: flex;
+}
+
+.u-justify-between {
+    justify-content: space-between;
 }
