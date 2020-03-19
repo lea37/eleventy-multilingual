@@ -12,3 +12,5 @@ fields:
   config:
     required: false
   label: Key
+pages:
+- fr/posts/une-autre-article-test.md
