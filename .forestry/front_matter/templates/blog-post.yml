@@ -9,4 +9,5 @@ fields:
   name: translationKey
   label: translationKey
 pages:
+- src/en/posts/another-post.md
 - src/fr/posts/un-autre-article-test.md
