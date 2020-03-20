@@ -19,3 +19,14 @@ npm install
 ```
 npm run serve
 ```
+
+## Content Management
+
+[![Import this project into Forestry](https://assets.forestry.io/import-to-forestryK.svg)](https://app.forestry.io/quick-start?repo=lea37/eleventy-multilingual&engine=other)
+
+This project has been pre-configured to work with [Forestry](https://forestry.io) a Git-based CMS, [import your repository in Forestry](https://app.forestry.io/quick-start?repo=lea37/eleventy-multilingual&engine=other) and you'll be able to edit and preview your site right away ✨.
+
+Any changes you make in Forestry will be commited back to the repo,
+
+![Forestry CMS User Interface](https://res.cloudinary.com/forestry-demo/image/upload/c_scale,f_auto,q_auto,w_980/v1584715905/eleventy-multilingual-forestry.png)
+
