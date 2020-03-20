@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{{ metaTitle }}</title>
+  <title>{{ site[locale].metaTitle }}</title>
   <script>document.documentElement.classList.remove('no-js');</script>
   <style>{% include "dist/css/main.css" %}</style>
 
   <!-- open graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="{{ metaTitle }}">
-  <meta property="og:image" content="{{ metaImage }}">
+  <meta property="og:title" content="{{ site[locale].metaTitle }}">
+  <meta property="og:image" content="{{ site[locale].metaImage }}">
   <meta property="og:site_name" content="{{ site.name }}">
-  <meta property="og:description" content="{{ metaDescription }}">
+  <meta property="og:description" content="{{ site[locale].metaDescription }}">
 
   <!-- twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="{{ site.twitter }}">
-  <meta name="twitter:title" content="{{ metaTitle }}">
-  <meta name="twitter:description" content="{{ metaDescription }}">
-  <meta name="twitter:image" content="{{ metaImage }}">
+  <meta name="twitter:title" content="{{ site[locale].metaTitle }}">
+  <meta name="twitter:description" content="{{ site[locale].metaDescription }}">
+  <meta name="twitter:image" content="{{ site[locale].metaImage }}">
 </head>
 <body {% if templateClass %} class="{{ templateClass }}"{% endif %}>
   {% include "partials/siteheader.njk" %}
@@ -29,6 +29,6 @@
       {% block content %}{% endblock %}
     </div>
   </main>
-  {# include "partials/sitefooter.njk" #}
+  {% include "partials/sitefooter.njk" %}
 </body>
 </html>
