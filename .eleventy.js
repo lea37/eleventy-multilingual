@@ -20,6 +20,7 @@ module.exports = function(eleventyConfig) {
 
     // copy css folder
     eleventyConfig.addPassthroughCopy('src/css/');
+    eleventyConfig.addPassthroughCopy('src/js/');
 
     // Base config
     return {

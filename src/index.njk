@@ -1,7 +1,14 @@
 ---
+pageTitle: Index
 templateClass: 'index'
 ---
 {% extends "layouts/base.njk" %}
+
+<script>
+  var locale = {lang: navigator.language || navigator.userLanguage}
+  nunjucks.renderString("{{ lang }}", locale)
+</script>
+<!-- {% set locale = 'fr' %} -->
 
 {% block content %}
     <h1 class="title js-title">Enter website</h1>

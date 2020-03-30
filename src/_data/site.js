@@ -14,13 +14,15 @@ module.exports = {
     }
   ],
   en: {
-    metaTitle: "Title in english",
-    metaDescription: "Description in english",
-    back: "Back"
+    metaTitle: "Multilingual Eleventy",
+    metaDescription: "A multilingual eleventy website demo",
+    back: "Back",
+    skipText: "Skip to the main content"
   },
   fr: {
-    metaTitle: "Titre en français",
-    metaDescription: "Description en français",
-    back: "Retour"
+    metaTitle: "Eleventy multilangues",
+    metaDescription: "Une demo eleventy multilangues",
+    back: "Retour",
+    skipText: "Passer au contenu principal"
   }
 };

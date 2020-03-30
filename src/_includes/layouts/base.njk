@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ locale }}">
+<html lang="{{ locale }}" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{ site[locale].metaTitle }}</title>
+  <meta name="description" content="{{ site[locale].metaDescription }}"/>
   <script>document.documentElement.classList.remove('no-js');</script>
   <style>{% include "dist/css/main.css" %}</style>
 
@@ -24,11 +25,12 @@
 </head>
 <body {% if templateClass %} class="{{ templateClass }}"{% endif %}>
   {% include "partials/siteheader.njk" %}
-  <main class="main">
+  <main id="main-content" class="main">
     <div class="inner">
       {% block content %}{% endblock %}
     </div>
   </main>
-  {% include "partials/sitefooter.njk" %}
+  <script>{% include "dist/js/app.js" %}</script>
+  {# include "partials/sitefooter.njk" #}
 </body>
 </html>
